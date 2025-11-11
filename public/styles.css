@@ -1,0 +1,137 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.85),
+    rgba(255, 255, 255, 0.85)
+  ),
+  url("https://upload.wikimedia.org/wikipedia/commons/1/1d/Tirumala_temple.JPG")
+    no-repeat center center fixed;
+
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+.container {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  color: #007bff;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #444;
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 0.3rem;
+  font-size: 1rem;
+}
+
+button {
+  display: block;
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.msg {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: green;
+  text-align: center;
+}
+
+#winners p {
+  background: #e8f5e9;
+  padding: 0.6rem;
+  border-radius: 8px;
+  margin: 0.5rem 0;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  color: #555;
+  font-size: 0.9rem;
+}
+.msg {
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+   /* Welcome screen style */
+    #welcomeScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, #fff8e7, #f6d365);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      z-index: 999;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    #welcomeScreen h1 {
+      font-size: 2rem;
+      color: #b8860b;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    #welcomeScreen p {
+      font-size: 1.2rem;
+      color: #444;
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }

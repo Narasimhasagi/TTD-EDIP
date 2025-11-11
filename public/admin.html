@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎲 Lucky Dip Admin Panel</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: 
+        linear-gradient(rgba(38, 11, 97, 0.7), rgba(37, 117, 252, 0.6)),
+        url('https://www.greatandhra.com/newphotos10/TIRUMALA1736390406.jpg') no-repeat center center/cover;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      text-align: center;
+      padding: 20px;
+      backdrop-filter: blur(2px);
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+    }
+
+    button {
+      background-color: #fff;
+      color: #2575fc;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #2575fc;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .loader-container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .loader {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #fff;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      position: relative;
+      animation: spin 1s linear infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .loader-image {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: contain;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .progress-text {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #ffeb3b;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    }
+
+    table {
+      margin-top: 30px;
+      border-collapse: collapse;
+      width: 85%;
+      max-width: 750px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    th {
+      background-color: rgba(255,255,255,0.2);
+      font-weight: bold;
+    }
+
+    .congrats {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ffeb3b;
+      animation: fadeIn 1.5s ease-in;
+      text-shadow: 0 0 10px rgba(255,255,255,0.9);
+    }
+
+    .subtext {
+      font-size: 1.1rem;
+      margin-top: 10px;
+      color: #fff;
+      line-height: 1.6;
+      animation: fadeIn 2s ease-in;
+      text-shadow: 0 0 5px rgba(0,0,0,0.6);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <h1>🛕 Lucky Dip Draw - Admin Panel</h1>
+  <button onclick="startDraw()">Start Draw</button>
+
+  <!-- 🔹 Loader with Balaji image inside -->
+  <div class="loader-container" id="loaderContainer">
+    <div class="loader" id="loader">
+      <img src="Balaji Logo.jpeg" alt="Loading Symbol" class="loader-image" />
+    </div>
+    <div class="progress-text" id="progressText">0%</div>
+  </div>
+
+  <div id="winnerSection"></div>
+
+  <script>
+    async function startDraw() {
+      const loaderContainer = document.getElementById("loaderContainer");
+      const progressText = document.getElementById("progressText");
+      const winnerSection = document.getElementById("winnerSection");
+
+      winnerSection.innerHTML = "";
+      loaderContainer.style.display = "flex";
+      let progress = 0;
+
+      const progressInterval = setInterval(() => {
+        if (progress < 100) {
+          progress += Math.floor(Math.random() * 10) + 5;
+          if (progress > 100) progress = 100;
+          progressText.textContent = `${progress}%`;
+        }
+      }, 200);
+
+      await new Promise(r => setTimeout(r, 3000));
+
+      const res = await fetch("http://localhost:5000/api/luckydip", { method: "POST" });
+      const data = await res.json();
+
+      clearInterval(progressInterval);
+      loaderContainer.style.display = "none";
+
+      if (!data.winners || data.winners.length === 0) {
+        winnerSection.innerHTML = "<p>No winners found.</p>";
+        return;
+      }
+
+      let table = `
+        <div class="congrats">🎉 Congratulations to the dear pilgrim!</div>
+        <div class="subtext">
+          🛕 Om Namo Venkatesaya 🙏<br>
+          You have been selected for the <strong>Random Lucky Dip</strong> for the
+          <strong>Special Entry Darshan (₹300)</strong> for the month of
+          <strong>February</strong>.<br>
+          Kindly check your registered email for more details. 🎉
+        </div>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Age</th>
+            <th>Gender</th>
+          </tr>
+      `;
+
+      data.winners.forEach(w => {
+        table += `
+          <tr>
+            <td>${w.name}</td>
+            <td>${w.email}</td>
+            <td>${w.phone}</td>
+            <td>${w.address}</td>
+            <td>${w.age}</td>
+            <td>${w.gender}</td>
+          </tr>
+        `;
+      });
+
+      table += "</table>";
+      winnerSection.innerHTML = table;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Monthly Ticket Giveaway 🎉</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+ 
+</head>
+<body>
+  <!-- 🌸 Welcome Screen -->
+  <div id="welcomeScreen">
+    <h1>🙏 Welcome to Krishna Kasarla Vlogs
+    & Srivari Leelalu Subscribers 🎉</h1>
+  </div>
+
+  <!-- 🌼 Main Content -->
+  <main class="container" style="display:none;">
+    <header>
+      <h1>Monthly Ticket Giveaway 🎁</h1>
+      <p>Register before <strong>23rd</strong> of every month to enter the lucky draw!</p>
+      <p>🎯 Two lucky winners will each receive Srivari Special Entry Tickets (300 Ruppes Tickets)!</p>
+    </header>
+
+    <section class="card">
+      <h2>📝 Registration Form</h2>
+      <form id="regForm">
+        <label>Name
+          <input name="name" required placeholder="Your full name" />
+        </label>
+
+        <label>Email
+          <input name="email" type="email" required placeholder="example@gmail.com" />
+        </label>
+
+        <label>Phone
+          <input name="phone" type="tel" required placeholder="10-digit number" />
+        </label>
+
+        <label>Address
+          <textarea name="address" rows="2" placeholder="Your address"></textarea>
+        </label>
+
+        <label>Gender
+          <select name="gender" required>
+            <option value="">Select gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </label>
+
+        <label>Age
+          <input name="age" type="number" min="10" max="100" required placeholder="Your age" />
+        </label>
+
+        <button type="submit" id="submitBtn">Register</button>
+      </form>
+      <div id="msg" class="msg"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Monthly Giveaway | Powered by <strong>Your Channel</strong></p>
+  </footer>
+
+    <script src="/app.js"></script>
+</body>
+</html>
